@@ -1,9 +1,5 @@
-import React from "react";
 
-function App() {
-    return (
-        <div className="App">
-        <h1>Hello React</h1>
-        </div>
-    );
-}
+import { render } from "react-dom";
+import {App} from "./App";
+
+render (<App/>, document.getElementById("root"));
