@@ -5,7 +5,7 @@ import { Container } from "./styles"
 
 
 export const TransactionsTable = () => {
-    const transactions = useContext(TransactionsContext);
+    const {transactions} = useContext(TransactionsContext);
     
     return (
         <Container>
@@ -20,8 +20,7 @@ export const TransactionsTable = () => {
                 </thead>
 
                 <tbody>
-                    {transactions.map(transaction => {
-                        return (
+                    {transactions.map(transaction => (
                             <tr key={transaction.id}>
                                 <td>{transaction.title}</td>
                                 <td className={transaction.type}>
@@ -33,8 +32,7 @@ export const TransactionsTable = () => {
                                 <td>{new Intl.DateTimeFormat('pt-BR').format(
                                     new Date(transaction.createdAt))}</td>
                             </tr>
-                        )
-                    })}
+                        ))}
                 </tbody>
             </table>
         </Container>

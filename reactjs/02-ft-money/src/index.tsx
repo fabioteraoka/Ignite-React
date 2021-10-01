@@ -14,7 +14,7 @@ createServer({
         {
           id:1, 
           title: 'Freelance de website',
-          type: 'Deposit',
+          type: 'deposit',
           category: 'Dev',
           amount: 6000,
           createdAt: new Date('2921-02-12 09:00:00'),
@@ -46,8 +46,8 @@ createServer({
       return this.schema.all('transactions');
     })
     this.post('/transactions', (schema, request) =>{
-      const data = JSON.parse(request.requestBody);
-      return schema.create('transactions', data);
+      const data = JSON.parse(request.requestBody)
+      return schema.create('transactions', data)
     })
   }
 })
