@@ -39,7 +39,7 @@ export const Summary = () => {
             <div>
                 <header>
                     <p>Saidas</p>
-                    <img src={outcomeImg} alt="Entradas" />
+                    <img src={outcomeImg} alt="Saidas" />
                 </header>
                 <strong>- {new Intl.NumberFormat('pt-BR',{
                             style: 'currency',
@@ -51,7 +51,7 @@ export const Summary = () => {
             <div className="hightLight-background">
                 <header>
                     <p>Total</p>
-                    <img src={totalImg} alt="Entradas" />
+                    <img src={totalImg} alt="Total" />
                 </header>
                 <strong>{new Intl.NumberFormat('pt-BR',{
                             style: 'currency',

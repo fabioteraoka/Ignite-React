@@ -2,14 +2,14 @@ import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 import { api } from '../../services/api';
 
 interface Transaction {
-    id: string
+    id: number
     title: string
     amount: number
     type: string
     category: string
     createdAt: string
 }
-interface TransactionsProviderProps{
+type TransactionsProviderProps ={
     children: ReactNode
 }
 interface TransactionsContextData{
