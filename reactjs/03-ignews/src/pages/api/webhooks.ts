@@ -43,12 +43,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         switch (type) {
           case 'checkout.session.completed':
 
-          const checkoutSession = event.data.object as Stripe.Checkout.Session;
+          const checkoutSessions = event.data.object as Stripe.Checkout.Session
 
           await saveSubscription(
-            checkoutSession.subscription.toString(),
-            checkoutSession.customer.toString(),
+            checkoutSessions.subscription.toString(),
+            checkoutSessions.customer.toString(),
           )
+
             break;
           default:
             throw new Error(`Unexpected event`);
