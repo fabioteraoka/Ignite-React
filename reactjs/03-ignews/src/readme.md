@@ -26,4 +26,4 @@ Headless CMS ( Painel de administração + API, HTTP, GraphQL, SDK)
 - Shopify
 - Saleor
 
-[]: # Path: src\readme.md
+Configurando o Prismic CMS
