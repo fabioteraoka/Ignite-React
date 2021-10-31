@@ -1,4 +1,4 @@
-.signInButton{
+.signInButton {
     height: 3rem;
     border-radius: 3rem;
     background: var(--gray-850);
@@ -12,22 +12,22 @@
     color: var(--white);
     font-size: bold;
 
-    svg{
+    svg {
         width: 20px;
         height: 20px;
     }
 
-    svg:first-child{
+    svg:first-child {
         margin-right: 1rem;
     }
 
-    svg.closeIcon{
+    svg.closeIcon {
         margin-left: 1rem;
     }
 
     transition: filter 0.2s;
 
-    &:hover{
+    &:hover {
         filter: brightness(0.8);
     }
 }

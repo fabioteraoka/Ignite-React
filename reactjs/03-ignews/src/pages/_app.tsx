@@ -11,5 +11,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </NextAuthProvider>
   );
 }
-
 export default MyApp;

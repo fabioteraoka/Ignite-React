@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 
-:root{
-    --white:#fff;
+:root {
+    --white: #fff;
 
     --gray-50: #e1e1e6;
     --gray-300: #a8a8b3;
@@ -31,21 +31,25 @@
 }
 
 
-body{
-  background: var(--gray-900);
-  color: var(--white);
+body {
+    background: var(--gray-900);
+    color: var(--white);
 }
 
 
-body, input, textarea, select, button {
+body,
+input,
+textarea,
+select,
+button {
     font: 400 1rem "Roboto", sans-serif;
 }
 
-button{
+button {
     cursor: pointer;
 }
 
-a{
+a {
     color: inherit;
     text-decoration: none;
 }
