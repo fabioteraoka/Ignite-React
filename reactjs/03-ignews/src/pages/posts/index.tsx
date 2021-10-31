@@ -1,53 +1,71 @@
-import Head  from 'next/head'
-import { getPrismicClient } from '../../services/prismic'
-import styles from './styles.module.scss'
-import Prismic from "@prismicio/client"
+import Head from "next/head";
+import { getPrismicClient } from "../../services/prismic";
+import styles from "./styles.module.scss";
+import Prismic from "@prismicio/client";
+import { RichText } from "prismic-dom";
+import { GetStaticProps } from "next";
 
+type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updatedAt: string;
+};
 
-export default function Posts () {
+interface PostsProps {
+  posts: Post[];
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
-        <title>Posts | Ignews</title> 
+        <title>Posts | Ignews</title>
       </Head>
 
       <main className={styles.container}>
-          <div className={styles.posts}>
-              <a href="#">
-                  <time>31 de outubro de 2021</time>
-                  <strong>125 MELHORES SITES PORNO DE 2021</strong>
-                  <p> internet revolucionou a nossa forma de consumir pornografia, e os sites pornô vieram pra ficar. Antes de tudo, desde 2012 o Testosterona criou e atualiza esta lista com 15 melhores sites porno, que depois passou pra 50, 100 e hoje estamos com nada menos do que 125 sites de pornografia!! Confira os melhores sites pornos e sites de sexo da atualidade. Qual melhor site porno? Aqui você vai encontrar os melhores sites pornográficos. Tem porno pra todos os gostos.</p>
-              </a>
-              <a href="#">
-                  <time>31 de outubro de 2021</time>
-                  <strong>125 MELHORES SITES PORNO DE 2021</strong>
-                  <p> internet revolucionou a nossa forma de consumir pornografia, e os sites pornô vieram pra ficar. Antes de tudo, desde 2012 o Testosterona criou e atualiza esta lista com 15 melhores sites porno, que depois passou pra 50, 100 e hoje estamos com nada menos do que 125 sites de pornografia!! Confira os melhores sites pornos e sites de sexo da atualidade. Qual melhor site porno? Aqui você vai encontrar os melhores sites pornográficos. Tem porno pra todos os gostos.</p>
-              </a>
-              <a href="#">
-                  <time>31 de outubro de 2021</time>
-                  <strong>125 MELHORES SITES PORNO DE 2021</strong>
-                  <p> internet revolucionou a nossa forma de consumir pornografia, e os sites pornô vieram pra ficar. Antes de tudo, desde 2012 o Testosterona criou e atualiza esta lista com 15 melhores sites porno, que depois passou pra 50, 100 e hoje estamos com nada menos do que 125 sites de pornografia!! Confira os melhores sites pornos e sites de sexo da atualidade. Qual melhor site porno? Aqui você vai encontrar os melhores sites pornográficos. Tem porno pra todos os gostos.</p>
-              </a>
-          </div>
+        <div className={styles.posts}>
+          {posts.map(post => (
+            <a key={post.slug} href="#">
+              <time>{post.updatedAt}</time>
+              <strong>{post.title}</strong>
+              <p>{post.excerpt}</p>
+            </a>
+          ))}
+        </div>
       </main>
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const prismic = getPrismicClient()
+  const prismic = getPrismicClient();
 
-    const response = await prismic.query([
-        Prismic.Predicates.at('document.type', 'post'),
-    ], {
-        fetch:['post.title', 'post.content'], 
-        pageSize:100,
+  const response = await prismic.query(
+    [Prismic.Predicates.at("document.type", "post")],
+    {
+      fetch: ["post.title", "post.content"],
+      pageSize: 100,
     }
-    )
-    console.log(JSON.stringify(response, null, 2))
+  );
 
-    return{
-        props:{}
-    }
-    
-}
+  const posts = response.results.map((post) => ({
+    slug: post.uid,
+    title: RichText.asText(post.data.title),
+    excerpt:
+      post.data.content.find(content => content.type === "paragraph")?.text ??
+      "",
+    updatedAt: new Date(post.last_publication_date).toLocaleDateString(
+      "pt-BR",
+      {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }
+    ),
+  }));
+
+  return {
+    props: {posts},
+  };
+};
