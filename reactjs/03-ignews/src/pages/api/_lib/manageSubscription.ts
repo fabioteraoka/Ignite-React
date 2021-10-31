@@ -21,17 +21,17 @@ export async function saveSubscription(
            
     const subscription = await stripe.subscriptions.retrieve(subscriptionId)
   
-    // const subscriptionData = {
-    //     id: subscription.id,
-    //     status: subscription.status,
-    //     price_id: subscription.items.data[0].price.id,
-    //     userId: userRef,
-    // }
+    const subscriptionData = {
+        id: subscription.id,
+        status: subscription.status,
+        price_id: subscription.items.data[0].price.id,
+        userId: userRef,
+    }
     if (createdAction) {
     await fauna.query(
         q.Create(
             q.Collection('subscriptions'),
-            { data: subscription } 
+            { data: subscriptionData } 
         )
     )
         } else {
@@ -42,11 +42,11 @@ export async function saveSubscription(
                         q.Get(
                             q.Match(
                                 q.Index('subscription_by_id'),
-                                subscription.id
+                                subscriptionId
                             )
                         )
                     ),
-                    { data: subscription }
+                    { data: subscriptionData }
                 )
             )
         }
