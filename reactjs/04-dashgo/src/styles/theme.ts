@@ -16,14 +16,14 @@ export const theme = extendTheme({
         }
     },
     fonts:{
-        heading:"Roboto",
-        body:"Roboto",
+        heading: "Roboto",
+        body: "Roboto",
+        color: "gray.50"
     },
     styles:{
         global:{
             body:{
-                bg: 'gray.900',
-                color: 'gray.50'
+                bg: 'gray.900'
             }
         }
     }
