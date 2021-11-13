@@ -17,7 +17,6 @@ export default function SignIn() {
         <Stack spacing={3}>
           <Input label="Email" name="email" type="email" />
           <Input label="Password" name="password" type="password" />
-
         </Stack>
           <Button type="submit" mt="6" colorScheme="pink" size="lg">
             SignIn
