@@ -22,7 +22,8 @@ export function Pagination() {
                 _disabled={{
                     bgColor:"pink.500",
                     cursor:"default"
-                }}>
+                }}
+                >
                     1
             </Button>
             <Button 
