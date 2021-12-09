@@ -32,7 +32,7 @@ export function makeServer(){
             server.createList('user', 20);
         },
         routes() {
-            this.namespace ="api";
+            this.namespace ="/api";
             this.timing = 750;
 
             this.get('/users');
